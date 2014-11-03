@@ -2,7 +2,6 @@ package com.hkr.smarthouse.models;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -16,14 +15,15 @@ public class Room {
 	private int id;
 	@Column(name = "roomName")
 	private String name;
-//	@OneToMany
-//	private List<Device> devices = new ArrayList<Device>();
-//	public List<Device> getDevices() { return devices; }
-//	public void setDevices(List<Device> devices) { this.devices = devices; }
+	@OneToMany
+	@JoinColumn(name = "roomId")
+	private List<Device> devices = new ArrayList<Device>();
+	
 	public Room(){}
 	public int getId() { return id; }
 	public void setId(int id) { this.id = id; }
 	public String getName() { return name; }
 	public void setName(String name) { this.name = name; }
-	
+	public List<Device> getDevices() { return devices; }
+	public void setDevices(List<Device> devices) { this.devices = devices; }
 }
