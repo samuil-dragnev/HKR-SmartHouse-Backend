@@ -18,12 +18,12 @@ public class Device {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "deviceId", unique = true, nullable = false)
 	private int id;
-	@Column(name = "deviceName")
+	@Column(name = "deviceName", nullable = false)
 	private String name;
-	@Column(name = "deviceState")
+	@Column(name = "deviceState", nullable = false)
 	private boolean state;
 	@ManyToOne
-	@JoinColumn(name = "roomId")
+	@JoinColumn(name = "roomId", nullable = false)
 	private Room room;
 	
 	public Device(){}

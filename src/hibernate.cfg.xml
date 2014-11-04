@@ -14,5 +14,6 @@
 
 		<mapping class="com.hkr.smarthouse.models.Room" />
 		<mapping class="com.hkr.smarthouse.models.Device" />
+		<mapping class="com.hkr.smarthouse.models.User" />
 	</session-factory>
 </hibernate-configuration>

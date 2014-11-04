@@ -1,4 +1,4 @@
-package com.hkr.smarthouse.db;
+package com.hkr.smarthouse.session;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

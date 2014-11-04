@@ -13,7 +13,7 @@ public class Room {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "roomId", unique = true, nullable = false)
 	private int id;
-	@Column(name = "roomName")
+	@Column(name = "roomName", nullable = false)
 	private String name;
 	@OneToMany
 	@JoinColumn(name = "roomId")

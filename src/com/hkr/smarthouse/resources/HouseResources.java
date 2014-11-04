@@ -1,21 +1,26 @@
 package com.hkr.smarthouse.resources;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import com.hkr.smarthouse.dao.*;
-import com.hkr.smarthouse.models.*;
+import com.hkr.smarthouse.dao.DeviceDAO;
+import com.hkr.smarthouse.dao.RoomDAO;
+import com.hkr.smarthouse.dao.UserDAO;
+import com.hkr.smarthouse.models.Device;
+import com.hkr.smarthouse.models.Room;
 
 @Path("/house")
 public class HouseResources {
 
 	private RoomDAO roomDAO = new RoomDAO();
 	private DeviceDAO deviceDAO = new DeviceDAO();
-
+	private UserDAO userDAO = new UserDAO();
+	
 	@GET
 	@Path("/rooms")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -47,9 +52,26 @@ public class HouseResources {
 	@GET
 	@Path("/devices")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String changeDeviceStatus(
+	public String changeDeviceState(
 			@QueryParam("id") int id,
 			@QueryParam("state") boolean state) {
 		return "{ \"updateSuccess\":"+deviceDAO.changeDeviceState(id, state)+"}";
+	}
+	
+	@POST
+	@Path("/user")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String authUser(
+			@QueryParam("ssn") String ssn,
+			@QueryParam("password") String password) {
+		return userDAO.login(ssn, password);
+	}
+	
+	@GET
+	@Path("/user/{ssn}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getUserInfo(
+			@PathParam("ssn") String ssn) {
+		return userDAO.getUser(ssn);
 	}
 }

@@ -3,9 +3,9 @@ package com.hkr.smarthouse.dao;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.hkr.smarthouse.db.HUtil;
 import com.hkr.smarthouse.models.Device;
 import com.hkr.smarthouse.models.Room;
+import com.hkr.smarthouse.session.HUtil;
 
 public class DeviceDAO {
 
