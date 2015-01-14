@@ -5,7 +5,13 @@
 <hibernate-configuration>
 	<session-factory>
 
+		<!--url="jdbc:mysql://localhost:3306/localdatabase" username="root" password="fagaha" -->
 		<property name="hibernate.connection.datasource">java:/comp/env/jdbc/localdatabase</property>
+
+		<!-- <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/localdatabase</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">fagaha</property>
+		 -->
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.current_session_context_class">thread</property>
@@ -15,5 +21,7 @@
 		<mapping class="com.hkr.smarthouse.models.Room" />
 		<mapping class="com.hkr.smarthouse.models.Device" />
 		<mapping class="com.hkr.smarthouse.models.User" />
+		<mapping class="com.hkr.smarthouse.models.House" />
+		<mapping class="com.hkr.smarthouse.models.UnauthorizedUser" />
 	</session-factory>
 </hibernate-configuration>

@@ -31,6 +31,17 @@ public class RoomDAO {
 		return rooms;
 	}
 	
+	public Room addRoom(String name, boolean isIndoors) {
+		Session session = HUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		Room temp = new Room();
+		temp.setName(name);
+		temp.setIndoors(isIndoors);
+		session.save(temp);
+        session.getTransaction().commit();
+        return temp;
+	}
+	
 	public Room getRoomByID(int id) {
 		Session session = HUtil.getSessionFactory().openSession();
 		session.beginTransaction();

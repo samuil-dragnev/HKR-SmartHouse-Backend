@@ -7,14 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-
 @Entity
-@Table(name = "Users")
+@Table(name = "unauthusers")
 @XmlRootElement
-public class User implements Serializable {
-	/**
-	 * 
-	 */
+public class UnauthorizedUser implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "userSSN", unique = true, nullable = false)
@@ -30,7 +26,9 @@ public class User implements Serializable {
 	
 	@Column(name = "userIsAdmin", nullable = false)
 	private boolean isAdmin;
-	public User() {}
+	
+	public UnauthorizedUser () {}
+	
 	public String getSsn() { return ssn; }
 	public void setSsn(String ssn) { this.ssn = ssn; }
 	public String getPassword() { return password; }

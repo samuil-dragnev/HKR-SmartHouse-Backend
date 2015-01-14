@@ -15,8 +15,10 @@ public class Room {
 	private int id;
 	@Column(name = "roomName", nullable = false)
 	private String name;
-	@OneToMany
-	@JoinColumn(name = "roomId")
+	@Column(name= "isIndoors", nullable = false)
+	private boolean isIndoors;
+	
+	@OneToMany(mappedBy = "room", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<Device> devices = new ArrayList<Device>();
 	
 	public Room(){}
@@ -24,6 +26,9 @@ public class Room {
 	public void setId(int id) { this.id = id; }
 	public String getName() { return name; }
 	public void setName(String name) { this.name = name; }
+	
 	public List<Device> getDevices() { return devices; }
 	public void setDevices(List<Device> devices) { this.devices = devices; }
+	public boolean isIndoors() { return isIndoors; }
+	public void setIndoors(boolean isIndoors) { this.isIndoors = isIndoors; }
 }

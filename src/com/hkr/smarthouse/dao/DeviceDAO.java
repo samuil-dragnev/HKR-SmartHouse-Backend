@@ -1,5 +1,8 @@
 package com.hkr.smarthouse.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -11,6 +14,27 @@ public class DeviceDAO {
 
 	public DeviceDAO() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public Device addDevice(int roomId, String deviceName) {
+		Session session = HUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		Room roomTemp = (Room) session.load(Room.class, roomId);
+		Device temp = new Device();
+		temp.setName(deviceName);
+		temp.setState(false);
+		if (roomTemp.getDevices() != null) {
+			roomTemp.getDevices().add(temp);
+		} else {
+			List<Device> devices = new ArrayList<Device>();
+			roomTemp.setDevices(devices);
+			roomTemp.getDevices().add(temp);
+		}
+		
+		session.save(temp);
+		session.save(roomTemp);
+        session.getTransaction().commit();
+        return temp;
 	}
 	
 	public Room getRoomByID(int id) {
@@ -33,7 +57,7 @@ public class DeviceDAO {
 		return device;
 	}
 	
-	public boolean changeDeviceState(int id, boolean state) {
+	public Device changeDeviceState(int id, boolean state) {
 		Session session = HUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		Query q = session.createQuery("UPDATE Device SET state = :state WHERE id = :id");
@@ -44,9 +68,9 @@ public class DeviceDAO {
 		System.out.println(result);
 		session.getTransaction().commit();
 		if (result == 1) {
-			return true;
+			return getDeviceByID(id);
 		} else {
-			return false;
+			return getDeviceByID(id);
 		}
 	}
 }
